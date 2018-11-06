@@ -170,24 +170,21 @@ public class ItemController {
     }
 
     /**
-     * @param productId
-     * @return
+     * @param productId  The id of the Product to find a Discount for.
+     * @return           The discount associated with that productId.
      */
 
     private Double getDiscount(int productId) {
-    	
-    	// TODO: multiple deals try and find all of them then see if there is an active deal on.
-        Optional<Deal> productDeal = EMarketApp.getStore().getDealList().stream()
-                .filter(d -> d.getProduct().getId() == productId).findAny();
+        Optional<Deal> productDeal = EMarketApp.getStore()
+        									   .getDealList()
+        									   .stream()
+        									   .filter(d -> (d.getProduct().getId() == productId) && (d.isActive() == true)).findAny();
+        
         if (!productDeal.isPresent()) {
             return 0.;
         }
 
-        Deal currentDeal = productDeal.get();
-        if (!currentDeal.isActive()) {
-            return 0.;
-        }
-
+        Deal currentDeal = productDeal.get();       
         return currentDeal.getDiscount();
 
     }
