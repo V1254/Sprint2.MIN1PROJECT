@@ -41,7 +41,6 @@ public class OrderController {
 		EMarketApp.getStore().getOrderList().removeIf(o -> o.getId() == orderId);
 		// update view with the new contents of the orderList.
 		model.addAttribute("orderList", EMarketApp.getStore().getOrderList());
-
 		return "form/orderMaster";
 	}
 

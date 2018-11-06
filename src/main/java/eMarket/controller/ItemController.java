@@ -40,8 +40,8 @@ public class ItemController {
 
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     public String ItemDetail(@ModelAttribute("itemFormDto") ItemFormDto ifd,
-            @RequestParam(value = "itemId", required = false, defaultValue = "-1") int itemId,
-            @RequestParam(value = "orderId", required = true) int orderId) {
+            				 @RequestParam(value = "itemId", required = false, defaultValue = "-1") int itemId,
+            				 @RequestParam(value = "orderId", required = true) int orderId) {
 
         Order currentOrder = getOrderById(orderId);
 
@@ -65,7 +65,7 @@ public class ItemController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String addItem(@Valid @ModelAttribute("itemFormDto") ItemFormDto ifd, BindingResult result,
-            @RequestParam String action, Model model) {
+            					 @RequestParam String action, Model model) {
 
         // no need to validate if its cancelled
         if (action.equals("Cancel")) {
@@ -90,12 +90,14 @@ public class ItemController {
             newItem.setId(oldItem.getId());
         }
 
+        // orderItem fields to create
         int productId = ifd.getProductId();
         int amount = ifd.getAmount();
         double discount = getDiscount(productId);
         double productPrice = getProductById(productId).getPrice();
         double cost = calculateCost(productPrice, discount, amount);
 
+        // setting those fields
         newItem.setProduct(getProductById(productId));
         newItem.setAmount(amount);
         newItem.setDiscount(discount);
@@ -110,7 +112,7 @@ public class ItemController {
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String deleteItem(@RequestParam(value = "itemId", required = true) int itemId,
-            @RequestParam(value = "orderId", required = true) int orderId, Model model) {
+            				 @RequestParam(value = "orderId", required = true) int orderId, Model model) {
 
         Order currentOrder = getOrderById(orderId);
         removeOrderItem(currentOrder, itemId);
@@ -130,16 +132,6 @@ public class ItemController {
             return productPrice * amount;
         }
         return (productPrice - (productPrice * discount)) * amount;
-    }
-
-    /**
-     * @param order The Order to Work with.
-     * @return The Largest id in the current Order.
-     */
-
-    private int findLargestId(Order order) {
-        // find item with highest id.
-        return order.getItemList().stream().max(Comparator.comparing(OrderItem::getId)).get().getId();
     }
 
     /**
@@ -183,6 +175,8 @@ public class ItemController {
      */
 
     private Double getDiscount(int productId) {
+    	
+    	// TODO: multiple deals try and find all of them then see if there is an active deal on.
         Optional<Deal> productDeal = EMarketApp.getStore().getDealList().stream()
                 .filter(d -> d.getProduct().getId() == productId).findAny();
         if (!productDeal.isPresent()) {
