@@ -1,5 +1,5 @@
-# C02006 - Courswork(20%) - Spring MVC and Validations.
-# Graded Score : 100%
+# C02006 - Coursework(20% of Module) - Spring MVC and Validations.
+# Graded Score : 100/100
 
 ## Topics Studied
 - Controllers(Request mappings)
