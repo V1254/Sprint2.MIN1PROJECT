@@ -1,5 +1,5 @@
 # C02006 - Courswork(20%) - Spring MVC and Validations.
-# Graded Score : %d
+# Graded Score : 100%
 
 ## Topics Studied
 - Controllers(Request mappings)
@@ -10,12 +10,13 @@
 ## Task For this Courswork
 
 The system had to be completed by developing code for the business logic/validation requirements stated below in the following classes
-* Controller class [eMarket.controller.OrderController](link)
-* Controller class [eMarket.controller.ItemController](link)
-* Validator class [eMarket.controller.ItemValidator](link)
+* Controller class [eMarket.controller.OrderController](/src/main/java/eMarket/controller/OrderController.java)
+* Controller class [eMarket.controller.ItemController](/src/main/java/eMarket/controller/ItemController.java)
+* Validator class [eMarket.controller.ItemValidator](/src/main/java/eMarket/controller/ItemValidator.java)
+     
 
-## Task For this Courswork
-### Part 1: Order creation
+### Task For this Courswork
+
 1. When clicking on `Order` in the view `index`, the user must be redirected to the view `orderMaster`. 
 2. When clicking on `Main Page` in the view `orderMaster`, the user must be redirected to the view `index`. 
 3. When clicking on `Add new order` in the view `orderMaster`, the user must be redirected to the view `orderDetail`. 
@@ -30,7 +31,6 @@ The system had to be completed by developing code for the business logic/validat
 8. When clicking on `Edit` for a specific order in the view `orderMaster`, the view `orderDetail` must display the details of the chosen order.
 9. When clicking on `Delete` for a specific order in the view `orderMaster`, the selected order must be deleted from `EMarketApp.store.orderList`.
 
-### Part 2: Order Item Creation
 10. When clicking on `Show all orders` in the view `orderDetail`, the user must be redirected to the view `orderMaster`. 
 11. When clicking on `Add new item` in the view `orderDetail`, the user must be redirected to the view `itemDetail`. 
 12. When clicking on `Submit` in the view `itemDetail`, and there are no validation errors, the user must be redirected to the view `orderDetail`. 
@@ -44,12 +44,8 @@ The system had to be completed by developing code for the business logic/validat
     * the `amount` must be set with the amount in the form in view `itemDetail`;
     * the `cost` must correspond to `amount * product.price`.
 
-### Form validation requirements [10 marks]
-
 19. In view `itemDetail`, when submitting a new item, if the field `amount` is empty an error must be displayed next to the field `amount`.
 20. In view `itemDetail`, when submitting a new item, if the `amount` provided is negative an error must be displayed next to the field `amount`.
-
-### Business logic requirements: apply discounts from active deals [20 marks] 
 
 21. When adding a new item by clicking on `Submit` in view `itemDetail`, the system should check if there is an active deal for the selected product in `EMarketApp.store.dealList`. In that case the discounted cost should be computed by applying the discount with the formula `(product.price - deal.discount * product.price) * amount`. Feel free to refactor the formula using your algebra skills. A deal is active for an order when:
     * the start date of the deal is before or equal to the order creation date, and there is no end date for the deal;
